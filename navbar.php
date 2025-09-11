@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 // navbar.php (partial)
 if (session_status() === PHP_SESSION_NONE) {

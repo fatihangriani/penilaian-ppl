@@ -25,31 +25,40 @@ $role = $_SESSION['role'] ?? ''; // ambil role dari session
 <body class="bg-light">
 
 <div class="container py-5">
-    <h2 class="text-center fw-bold mb-4">📦 Detail Barang</h2>
 
-    <div class="card shadow mx-auto" style="max-width: 500px;">
+    <!-- Judul Halaman -->
+    <h2 class="text-center fw-bold mb-5">📦 Detail Barang</h2>
+
+    <!-- Card Detail Barang -->
+    <div class="card shadow-lg mx-auto border-0" style="max-width: 600px;">
+        <div class="card-header bg-dark text-white fw-bold">
+            Informasi Barang
+        </div>
         <div class="card-body">
-            <table class="table table-borderless">
+            <table class="table table-striped">
                 <tr>
-                    <th scope="row" style="width: 150px;">ID</th>
+                    <th style="width: 150px;">ID Barang</th>
                     <td><?= $barang['id_barang']; ?></td>
                 </tr>
                 <tr>
-                    <th scope="row">Nama</th>
+                    <th>Nama</th>
                     <td><?= htmlspecialchars($barang['nama_barang']); ?></td>
                 </tr>
                 <tr>
-                    <th scope="row">Harga</th>
-                    <td>Rp <?= number_format($barang['harga'], 0, ',', '.'); ?></td>
+                    <th>Harga</th>
+                    <td class="text-success fw-bold">Rp <?= number_format($barang['harga'], 0, ',', '.'); ?></td>
                 </tr>
                 <tr>
-                    <th scope="row">Stok</th>
-                    <td><?= $barang['stok']; ?></td>
+                    <th>Stok</th>
+                    <td>
+                        <span class="badge bg-primary fs-6"><?= $barang['stok']; ?></span>
+                    </td>
                 </tr>
             </table>
 
+            <!-- Tombol Aksi -->
             <div class="d-flex justify-content-center gap-2 mt-4">
-                <a href="barang.php" class="btn btn-primary">⬅ Kembali</a>
+                <a href="barang.php" class="btn btn-outline-primary">⬅ Kembali</a>
                 <a href="edit_barang.php?id=<?= $barang['id_barang']; ?>" class="btn btn-success">✏ Edit</a>
                 <a href="hapus_barang.php?id=<?= $barang['id_barang']; ?>" 
                    class="btn btn-danger"
@@ -57,31 +66,33 @@ $role = $_SESSION['role'] ?? ''; // ambil role dari session
             </div>
         </div>
     </div>
-</div>
 
-<?php if (strtolower($role) === 'suplier'): ?>
-<div class="container py-4">
-    <div class="card shadow mx-auto" style="max-width: 500px;">
+    <!-- Form Tambah Stok (Khusus Suplier) -->
+    <?php if (strtolower($role) === 'suplier'): ?>
+    <div class="card shadow-lg mx-auto border-0 mt-5" style="max-width: 600px;">
+        <div class="card-header bg-success text-white fw-bold">
+            ➕ Tambah Stok Barang
+        </div>
         <div class="card-body">
-            <h4 class="fw-bold mb-3">➕ Tambah Stok</h4>
             <form method="POST" action="update_stok.php">
                 <div class="mb-3">
                     <label class="form-label">Jumlah Stok</label>
-                    <input type="number" name="stok" class="form-control" min="1" placeholder="Jumlah" required>
+                    <input type="number" name="stok" class="form-control" min="1" placeholder="Masukkan jumlah stok" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Keterangan</label>
-                    <input type="text" name="keterangan" class="form-control" placeholder="Opsional">
+                    <input type="text" name="keterangan" class="form-control" placeholder="Opsional (contoh: stok baru)">
                 </div>
                 <input type="hidden" name="id_barang" value="<?= $barang['id_barang']; ?>">
-                <button type="submit" name="tambah" class="btn btn-success">
-                    ➕ Tambah
+                <button type="submit" name="tambah" class="btn btn-success w-100">
+                    ➕ Tambahkan Stok
                 </button>
             </form>
         </div>
     </div>
+    <?php endif; ?>
+
 </div>
-<?php endif; ?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
