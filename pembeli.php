@@ -1,22 +1,8 @@
 <?php
-session_start();
-
 include "funtions.php";
+require "auth.php";
 include "navbar.php";
-if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
-    exit;
-}
 
-// jika role suplier coba akses halaman lain → redirect ke barang.php
-if ($_SESSION['role'] == 'suplier') {
-    header("Location: barang.php");
-    exit;
-}
-if ($_SESSION['role'] == 'kasir') {
-    header("Location: index.php");
-    exit;
-}
 
 $keyword = isset($_GET['search']) ? $_GET['search'] : "";
 

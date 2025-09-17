@@ -1,22 +1,6 @@
 <?php
-session_start();
 require "funtions.php";
-
-if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
-    exit;
-}
-
-// jika role suplier coba akses halaman lain → redirect ke barang.php
-if ($_SESSION['role'] == 'suplier') {
-    header("Location: barang.php");
-    exit;
-}
-
-if ($_SESSION['role'] == 'kasir') {
-    header("Location: index.php");
-    exit;
-}
+require "auth.php";
 include "navbar.php";
 
 // ambil keyword pencarian kalau ada
