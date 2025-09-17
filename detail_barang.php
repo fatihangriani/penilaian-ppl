@@ -1,7 +1,15 @@
 <?php
 require "funtions.php";
 session_start(); // pastikan session dimulai
-
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit;
+}
+if ($_SESSION['role'] == 'kasir') {
+    header("Location: index.php");
+    exit;
+}
+include "navbar.php";
 $id = $_GET['id'];
 
 // ambil data barang

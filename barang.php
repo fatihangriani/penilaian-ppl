@@ -7,6 +7,10 @@ if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit;
 }
+if ($_SESSION['role'] == 'kasir') {
+    header("Location: index.php");
+    exit;
+}
 include "navbar.php";
 
 $keyword = isset($_GET['search']) ? $_GET['search'] : "";

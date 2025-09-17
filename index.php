@@ -12,6 +12,11 @@ if ($_SESSION['role'] == 'suplier') {
     header("Location: barang.php");
     exit;
 }
+
+if ($_SESSION['role'] == 'kasir') {
+    header("Location: index.php");
+    exit;
+}
 include "navbar.php";
 
 // ambil keyword pencarian kalau ada

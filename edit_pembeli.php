@@ -1,5 +1,17 @@
 <?php
+session_start();
 require "funtions.php";
+
+// Cek login
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit;
+}
+if ($_SESSION['role'] == 'kasir') {
+    header("Location: index.php");
+    exit;
+}
+include "navbar.php";
 $id= $_GET['id'];
 $data = query("SELECT * FROM pembeli WHERE id_pembeli=$id");
 

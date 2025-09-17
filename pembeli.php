@@ -13,6 +13,10 @@ if ($_SESSION['role'] == 'suplier') {
     header("Location: barang.php");
     exit;
 }
+if ($_SESSION['role'] == 'kasir') {
+    header("Location: index.php");
+    exit;
+}
 
 $keyword = isset($_GET['search']) ? $_GET['search'] : "";
 
